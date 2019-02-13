@@ -1,5 +1,7 @@
 /* VINA NICOLETA, 325CD */
 	
+	ENUNT - http://elf.cs.pub.ro/poo/arhiva/teme/2017/tema2
+	
 	In Main se citesc datele de intrare, ce sunt salvate sub forma de String
 intr-un array. Se formeaza apoi un alt array, ce contine instantele formelor
 si pe care se da accept(visitor), metoda visit implementand desenarea propriu
