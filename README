@@ -1,0 +1,37 @@
+/* VINA NICOLETA, 325CD */
+	
+	In Main se citesc datele de intrare, ce sunt salvate sub forma de String
+intr-un array. Se formeaza apoi un alt array, ce contine instantele formelor
+si pe care se da accept(visitor), metoda visit implementand desenarea propriu
+zisa a formelor, urmand ca la final sa se formeze imaginea de output ceruta.
+	Pentru utilizarea patternului Factory, exista interfata Shapes, ce extinde
+Visitable, cu metoda makeShape care returneaza o instanta a unei figuri atunci
+cand este apelata. In clasa ShapeFactory se afla metoda getShape, ce returneaza
+o noua instanta a formei, in functie de tipul primit. In cadrul Canvas-ului este
+implementat patternul Singleton, deoarece exista mereu un singur canvas, astfel 
+incat pentru acesta se apeleaza getInstance.
+	Patternul Visitor se concretizeaza prin existenta interfetelor Visitable
+(cu metoda accept) si Visitor (cu metoda visit pentru fiecare tip de forma).
+Clasa DrawVisitor implementeaza Visitor, astfel ca in fiecare visit exista 
+implementarea propriu-zisa a desenarii figurii respective pe care o primeste.
+Desenarea utilizeaza metode ce sunt implementate intr-o clasa ajutatoare,
+DrawShape: verificarea daca un pixel e in canvas, Bresenham Algorithm pentru
+trasarea unei linii(ce este apelat la trasarea liniilor tuturor poligoanelor;
+este adaugata partea ce traseaza linii verticale si orizontale, deoarece acestea
+nu pot fi determinate pe baza de panta), algoritmul de trasare a cercurilor si
+floodFill-ul, pentru umplerea formelor ce nu sunt formate dintr-o matrice de
+pixeli; de asemenea, contine si metoda ce converteste culoarea data ca string
+in valoarea acesteia ca int. 
+	Exista clase pentru fiecare tip de forma: Canvas, Circle, Diamond, Line,
+Polygon, Rectangle, Square, Triangle. Acestea implementeaza Visitable si Shapes:
+pentru Visitable, contin metoda accept(visitor), iar pentru Shapes, implementeaza
+makeShape, ce intoarce instanta formei (tip Shapes), dar updatata, adica ii
+seteaza campurile cu parametrii obtinuti din stringul din datele de intrare.
+	In clasa Image exista metoda makeShapes, ce apeleaza makeShape pentru fiecare
+forma si formeaza un array de instante ale acestora. Acest vector de instante 
+este utilizat in Main: se apeleaza accept(visitor) pe fiecare instanta, visitor
+fiind de tip DrawVisitor. Astfel o instanta a formei da accept visitorului,
+care de fapt deseneaza propriu-zis forma.
+	Asadar, apeland accept pe fiecare instanta a formei, se deseneaza forma
+respectiva si se obtine in final imaginea, in format "drawing.png".
+	
